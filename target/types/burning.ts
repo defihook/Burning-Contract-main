@@ -1,0 +1,547 @@
+export type Burning = {
+  "version": "0.1.0",
+  "name": "burning",
+  "instructions": [
+    {
+      "name": "initialize",
+      "accounts": [
+        {
+          "name": "admin",
+          "isMut": true,
+          "isSigner": true
+        },
+        {
+          "name": "globalAuthority",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "systemProgram",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "rent",
+          "isMut": false,
+          "isSigner": false
+        }
+      ],
+      "args": []
+    },
+    {
+      "name": "register",
+      "accounts": [
+        {
+          "name": "owner",
+          "isMut": true,
+          "isSigner": true
+        },
+        {
+          "name": "globalAuthority",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "listData",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "userNftTokenAccount",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "destNftTokenAccount",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "nftMint",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "tokenProgram",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "systemProgram",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "rent",
+          "isMut": false,
+          "isSigner": false
+        }
+      ],
+      "args": [
+        {
+          "name": "style",
+          "type": {
+            "vec": "u64"
+          }
+        },
+        {
+          "name": "artist",
+          "type": {
+            "vec": "u64"
+          }
+        },
+        {
+          "name": "amount",
+          "type": {
+            "vec": "u64"
+          }
+        }
+      ]
+    },
+    {
+      "name": "burnToGet",
+      "accounts": [
+        {
+          "name": "owner",
+          "isMut": true,
+          "isSigner": true
+        },
+        {
+          "name": "globalAuthority",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "listData",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "srcNftTokenAccount",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "destNftTokenAccount",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "nftMint",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "tokenProgram",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "systemProgram",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "rent",
+          "isMut": false,
+          "isSigner": false
+        }
+      ],
+      "args": [
+        {
+          "name": "globalBump",
+          "type": "u8"
+        }
+      ]
+    }
+  ],
+  "accounts": [
+    {
+      "name": "globalPool",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "superAdmin",
+            "type": "publicKey"
+          }
+        ]
+      }
+    },
+    {
+      "name": "listData",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "mint",
+            "type": "publicKey"
+          },
+          {
+            "name": "style",
+            "type": {
+              "array": [
+                "u64",
+                8
+              ]
+            }
+          },
+          {
+            "name": "artist",
+            "type": {
+              "array": [
+                "u64",
+                8
+              ]
+            }
+          },
+          {
+            "name": "amount",
+            "type": {
+              "array": [
+                "u64",
+                8
+              ]
+            }
+          }
+        ]
+      }
+    }
+  ],
+  "errors": [
+    {
+      "code": 6000,
+      "name": "InvalidSuperOwner",
+      "msg": "Invalid Super Owner"
+    },
+    {
+      "code": 6001,
+      "name": "InvalidGlobalPool",
+      "msg": "Invalid Global Pool Address"
+    },
+    {
+      "code": 6002,
+      "name": "InvalidDataCounter",
+      "msg": "Invalid Data Counter"
+    },
+    {
+      "code": 6003,
+      "name": "InvalidAdminAddress",
+      "msg": "Invalid Admin Address"
+    },
+    {
+      "code": 6004,
+      "name": "InvalidSetAmount",
+      "msg": "Invalid Set Amount"
+    },
+    {
+      "code": 6005,
+      "name": "InvalidWithdrawTime",
+      "msg": "Invalid Withdraw Time"
+    },
+    {
+      "code": 6006,
+      "name": "InvalidNFTAddress",
+      "msg": "Not Found Staked Mint"
+    },
+    {
+      "code": 6007,
+      "name": "InsufficientRewardVault",
+      "msg": "Insufficient Reward Token Balance"
+    },
+    {
+      "code": 6008,
+      "name": "InsufficientTokenAmount",
+      "msg": "Insufficient Token Balance"
+    },
+    {
+      "code": 6009,
+      "name": "InvaliedMetadata",
+      "msg": "Invalid Metadata Address"
+    },
+    {
+      "code": 6010,
+      "name": "MetadataCreatorParseError",
+      "msg": "Can't Parse The NFT's Creators"
+    },
+    {
+      "code": 6011,
+      "name": "UnkownOrNotAllowedNFTCollection",
+      "msg": "Unknown Collection Or The Collection Is Not Allowed"
+    }
+  ]
+};
+
+export const IDL: Burning = {
+  "version": "0.1.0",
+  "name": "burning",
+  "instructions": [
+    {
+      "name": "initialize",
+      "accounts": [
+        {
+          "name": "admin",
+          "isMut": true,
+          "isSigner": true
+        },
+        {
+          "name": "globalAuthority",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "systemProgram",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "rent",
+          "isMut": false,
+          "isSigner": false
+        }
+      ],
+      "args": []
+    },
+    {
+      "name": "register",
+      "accounts": [
+        {
+          "name": "owner",
+          "isMut": true,
+          "isSigner": true
+        },
+        {
+          "name": "globalAuthority",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "listData",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "userNftTokenAccount",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "destNftTokenAccount",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "nftMint",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "tokenProgram",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "systemProgram",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "rent",
+          "isMut": false,
+          "isSigner": false
+        }
+      ],
+      "args": [
+        {
+          "name": "style",
+          "type": {
+            "vec": "u64"
+          }
+        },
+        {
+          "name": "artist",
+          "type": {
+            "vec": "u64"
+          }
+        },
+        {
+          "name": "amount",
+          "type": {
+            "vec": "u64"
+          }
+        }
+      ]
+    },
+    {
+      "name": "burnToGet",
+      "accounts": [
+        {
+          "name": "owner",
+          "isMut": true,
+          "isSigner": true
+        },
+        {
+          "name": "globalAuthority",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "listData",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "srcNftTokenAccount",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "destNftTokenAccount",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "nftMint",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "tokenProgram",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "systemProgram",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "rent",
+          "isMut": false,
+          "isSigner": false
+        }
+      ],
+      "args": [
+        {
+          "name": "globalBump",
+          "type": "u8"
+        }
+      ]
+    }
+  ],
+  "accounts": [
+    {
+      "name": "globalPool",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "superAdmin",
+            "type": "publicKey"
+          }
+        ]
+      }
+    },
+    {
+      "name": "listData",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "mint",
+            "type": "publicKey"
+          },
+          {
+            "name": "style",
+            "type": {
+              "array": [
+                "u64",
+                8
+              ]
+            }
+          },
+          {
+            "name": "artist",
+            "type": {
+              "array": [
+                "u64",
+                8
+              ]
+            }
+          },
+          {
+            "name": "amount",
+            "type": {
+              "array": [
+                "u64",
+                8
+              ]
+            }
+          }
+        ]
+      }
+    }
+  ],
+  "errors": [
+    {
+      "code": 6000,
+      "name": "InvalidSuperOwner",
+      "msg": "Invalid Super Owner"
+    },
+    {
+      "code": 6001,
+      "name": "InvalidGlobalPool",
+      "msg": "Invalid Global Pool Address"
+    },
+    {
+      "code": 6002,
+      "name": "InvalidDataCounter",
+      "msg": "Invalid Data Counter"
+    },
+    {
+      "code": 6003,
+      "name": "InvalidAdminAddress",
+      "msg": "Invalid Admin Address"
+    },
+    {
+      "code": 6004,
+      "name": "InvalidSetAmount",
+      "msg": "Invalid Set Amount"
+    },
+    {
+      "code": 6005,
+      "name": "InvalidWithdrawTime",
+      "msg": "Invalid Withdraw Time"
+    },
+    {
+      "code": 6006,
+      "name": "InvalidNFTAddress",
+      "msg": "Not Found Staked Mint"
+    },
+    {
+      "code": 6007,
+      "name": "InsufficientRewardVault",
+      "msg": "Insufficient Reward Token Balance"
+    },
+    {
+      "code": 6008,
+      "name": "InsufficientTokenAmount",
+      "msg": "Insufficient Token Balance"
+    },
+    {
+      "code": 6009,
+      "name": "InvaliedMetadata",
+      "msg": "Invalid Metadata Address"
+    },
+    {
+      "code": 6010,
+      "name": "MetadataCreatorParseError",
+      "msg": "Can't Parse The NFT's Creators"
+    },
+    {
+      "code": 6011,
+      "name": "UnkownOrNotAllowedNFTCollection",
+      "msg": "Unknown Collection Or The Collection Is Not Allowed"
+    }
+  ]
+};
