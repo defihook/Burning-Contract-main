@@ -8,7 +8,6 @@ export const BURNING_PROGRAM_ID = new PublicKey("3odjqzDkeYVZXjZa9L1sV3z93ohGTba
 export const LIST_POOL_SIZE = 232;
 
 export interface GlobalPool {
-    // 8 + 40
     superAdmin: PublicKey,              // 32
 }
 
